@@ -2,9 +2,5 @@
 @import './styles/base.css';
 @import './styles/utilities.css';
 @import './styles/theme.css';
-@import "tailwindcss";
-
-
-@tailwind base;
-@tailwind components;
+@import "tailwindcss/preflight";
 @tailwind utilities;

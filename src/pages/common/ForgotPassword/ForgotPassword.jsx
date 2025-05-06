@@ -4,7 +4,7 @@ import { message } from 'antd';
 import { useDispatch } from 'react-redux';
 import { HideLoading, ShowLoading } from '../../../redux/loaderSlice';
 import { isValidEmail } from '../../../utils/validationUtils';
-import userService from '../../../services/userService';
+/* import userService from '../../../services/userService'; */
 import AuthContainer from '../../../components/AuthContainer/AuthContainer';
 import Form from './components/Form/Form';
 import ResendEmail from './components/ResendEmail/ResendEmail';
@@ -42,7 +42,7 @@ const ForgotPassword = () => {
         }
         dispatch(ShowLoading());
         try {
-            const response = await userService.forgotPassword({ email }, 'user');
+            //const response = await userService.forgotPassword({ email }, 'user');
             setView(1);
         } catch (error) {
             message.error(error.response.data?.error);

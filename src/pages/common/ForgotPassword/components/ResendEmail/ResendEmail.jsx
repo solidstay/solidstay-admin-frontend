@@ -1,6 +1,7 @@
 import './ResendEmail.css';
 import '../../../../../styles/authForm.css';
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 const ResendEmail = ({ handleReset, setView }) => {
 
@@ -21,6 +22,10 @@ const ResendEmail = ({ handleReset, setView }) => {
             </div>
         </div>
     )
+};
+ResendEmail.propTypes = {
+    handleReset: PropTypes.func.isRequired,
+    setView: PropTypes.func.isRequired,
 };
 
 export default ResendEmail;

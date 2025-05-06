@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { FaEdit, FaEye } from "react-icons/fa";
+import  { useEffect, useState } from "react";
+import { FaEdit } from "react-icons/fa";
 import { TbBucket } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import propertyService from "../../services/propertyService";
@@ -87,7 +87,7 @@ const Home = () => {
             </tr>
           </thead>
           <tbody>
-            {properties.map((item, index) => (
+            {properties.map((item) => (
               <tr key={item._id} className={`border-b ${selectedRows.includes(item._id) ? 'bg-gray-200' : ''}`}>
                 <td className="p-4">
                   <input

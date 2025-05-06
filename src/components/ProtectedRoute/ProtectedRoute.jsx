@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './ProtectedRoute.css';
 import { Navigate, useLocation } from 'react-router-dom';
 import { isAuthenticated, verifyAuthorization } from '../../utils/authUtils';
@@ -27,7 +28,7 @@ const ProtectedRoute = ({ children, showSidebar, ...rest }) => {
                 setIsAuthorized(authorized ? 'yes' : 'no');
             }
         }
-    }, [isAuth, location, user]);
+    }, [isAuth, location, user, dispatch, isAuthorized]);
 
     return isAuth ? (
         <div className='page'>
@@ -55,6 +56,10 @@ const ProtectedRoute = ({ children, showSidebar, ...rest }) => {
             }
         </>
     );
+};
+ProtectedRoute.propTypes = {
+    children: PropTypes.node.isRequired,
+    showSidebar: PropTypes.bool,
 };
 
 export default ProtectedRoute;

@@ -2,6 +2,7 @@ import '../../../../../styles/authForm.css';
 import UserIcon from '../../../../../assets/icons/user.svg?react';
 import CompanyIcon from '../../../../../assets/icons/company.svg?react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Choice = ({ type, setType, handleViewChange }) => {
 
@@ -68,6 +69,11 @@ const Choice = ({ type, setType, handleViewChange }) => {
             </div>
         </div>
     )
+};
+Choice.propTypes = {
+    type: PropTypes.string.isRequired,
+    setType: PropTypes.func.isRequired,
+    handleViewChange: PropTypes.func.isRequired,
 };
 
 export default Choice;

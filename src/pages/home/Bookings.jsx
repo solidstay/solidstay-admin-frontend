@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { FaEdit, FaEye } from "react-icons/fa";
+import { useEffect, useState } from "react";
 import { TbBucket } from "react-icons/tb";
-import { useNavigate } from "react-router-dom";
+/* import { useNavigate } from "react-router-dom"; */
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import bookingService from "../../services/bookingService";
 
 const Bookings = () => {
-  const navigate = useNavigate();
-  const [selectedRows, setSelectedRows] = useState([]);
+  /* const navigate = useNavigate(); */
+  const [selectedRows, /* setSelectedRows */] = useState([]);
   const [properties, setProperties] = useState([]);
 
-  const handleRowSelection = (id) => {
+  /* const handleRowSelection = (id) => {
     if (selectedRows.includes(id)) {
       setSelectedRows(selectedRows.filter(rowId => rowId !== id));
     } else {
       setSelectedRows([...selectedRows, id]);
     }
-  };
+  }; */
 
   const getAllProperties = async () => {
     try {

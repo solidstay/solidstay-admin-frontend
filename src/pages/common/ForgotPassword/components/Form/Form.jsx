@@ -1,5 +1,6 @@
 import '../../../../../styles/authForm.css';
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 const Form = ({ email, setEmail, emailError, handleReset }) => {
 
@@ -34,6 +35,12 @@ const Form = ({ email, setEmail, emailError, handleReset }) => {
             </div>
         </div>
     )
+};
+Form.propTypes = {
+    email: PropTypes.string.isRequired,
+    setEmail: PropTypes.func.isRequired,
+    emailError: PropTypes.string,
+    handleReset: PropTypes.func.isRequired,
 };
 
 export default Form;

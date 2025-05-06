@@ -5,7 +5,7 @@ const Unauthorized = () => {
         <div className="unauthorized-page">
             <div className="inner-content">
                 <h1>401 Unauthorized</h1>
-                <p>Oops! You don't have permission to access this page.</p>
+                <p>Oops! You don&apos;t have permission to access this page.</p>
             </div>
         </div>
     );

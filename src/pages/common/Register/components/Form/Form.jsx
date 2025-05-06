@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import '../../../../../styles/authForm.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
@@ -288,6 +289,9 @@ const Form = ({ type }) => {
             </div>
         </div>
     )
+};
+Form.propTypes = {
+    type: PropTypes.string.isRequired,
 };
 
 export default Form;

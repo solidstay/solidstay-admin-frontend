@@ -36,7 +36,7 @@ const Form = () => {
         else {
             message.error('Invalid reset link!');
         }
-    }, []);
+    }, [location.search]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

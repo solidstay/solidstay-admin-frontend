@@ -1,5 +1,5 @@
-import React from 'react';
 import Modal from 'react-modal';
+import PropTypes from 'prop-types';
 import './CustomModal.css';
 import CrossIcon from '../../assets/icons/cross_icon.svg?react';
 
@@ -27,6 +27,13 @@ const CustomModal = ({ isOpen, onRequestClose, contentLabel, children, width = '
             {children}
         </Modal>
     );
+};
+CustomModal.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    onRequestClose: PropTypes.func.isRequired,
+    contentLabel: PropTypes.string.isRequired,
+    children: PropTypes.node,
+    width: PropTypes.string,
 };
 
 export default CustomModal;

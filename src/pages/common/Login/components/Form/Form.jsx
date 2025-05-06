@@ -146,7 +146,7 @@ const Form = () => {
                 <button className='btn' onClick={handleSubmit}>Log In</button>
             </div>
             <div className='navigation'>
-                <div>Don't have an account?</div>
+                <div>Don&apos;t have an account?</div>
                 <Link to='/register' className='nav-link'>Sign up here</Link>
             </div>
         </div>

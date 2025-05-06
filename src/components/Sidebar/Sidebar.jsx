@@ -2,17 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import './Sidebar.css';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import LogoImage from '../../assets/images/logo.webp';
-import LogoutIcon from '../../assets/icons/logout_icon.svg?react';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BiMenuAltRight } from "react-icons/bi";
-import { useDispatch, useSelector } from 'react-redux';
-import { message } from 'antd';
+import { /* useDispatch, */ useSelector } from 'react-redux';
+/* import { message } from 'antd';
 import { HideLoading, ShowLoading } from '../../redux/loaderSlice';
 import Cookies from 'js-cookie';
 import { setLoggedOut } from '../../redux/logoutSlice';
-import { clearUser } from '../../redux/userSlice';
+import { clearUser } from '../../redux/userSlice'; */
 import { menuItems } from '../../constants/menuItems';
-import userService from '../../services/userService';
+/* import userService from '../../services/userService'; */
 import { GoHome } from "react-icons/go";
 import { TbBulb, TbHomePlus } from 'react-icons/tb';
 
@@ -22,7 +21,7 @@ const Sidebar = () => {
     const { user } = useSelector(state => state.user);
     const items = menuItems[user?.role] || [];
     const location = useLocation();
-    const dispatch = useDispatch();
+    /* const dispatch = useDispatch(); */
     const navigate=useNavigate()
 
     useEffect(() => {
@@ -45,7 +44,7 @@ const Sidebar = () => {
         setIsOpen(false);
     };
 
-    const handleLogout = async () => {
+   /*  const handleLogout = async () => {
         dispatch(ShowLoading());
         try {
             await userService.logoutUser({});
@@ -56,7 +55,7 @@ const Sidebar = () => {
             message.error(error.response.data);
         }
         dispatch(HideLoading());
-    };
+    }; */
 
     return (
         <div className='sidebar-wrapper'>

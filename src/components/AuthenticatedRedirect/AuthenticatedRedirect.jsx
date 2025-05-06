@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Navigate, useLocation } from 'react-router-dom';
 import { isAuthenticated } from '../../utils/authUtils';
 
@@ -12,6 +13,9 @@ const AuthenticatedRedirect = ({ children, ...rest }) => {
     }
 
     return React.cloneElement(children, { ...rest });
+};
+AuthenticatedRedirect.propTypes = {
+    children: PropTypes.node.isRequired,
 };
 
 export default AuthenticatedRedirect;

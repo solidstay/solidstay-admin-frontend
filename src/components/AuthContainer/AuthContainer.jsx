@@ -1,5 +1,6 @@
 import './AuthContainer.css';
-import IllustrationIcon from '../../assets/icons/illustration.svg?react';
+import IllustrationIcon from '../../assets/icons/Illustration.svg';
+import PropTypes from 'prop-types';
 
 const AuthContainer = ({ children }) => {
     return (
@@ -12,6 +13,9 @@ const AuthContainer = ({ children }) => {
             </div>
         </div>
     );
+};
+AuthContainer.propTypes = {
+    children: PropTypes.node.isRequired,
 };
 
 export default AuthContainer;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa"; // Importing the close icon
 import Select from "react-select";
 import './style.css'

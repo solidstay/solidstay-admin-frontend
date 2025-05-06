@@ -1,7 +1,6 @@
-// components/SidebarLayout/SidebarLayout.jsx
-import React from 'react';
 import Sidebar from '../Sidebar/Sidebar.jsx';
 import './Sidebar.css'; // if needed
+import PropTypes from 'prop-types';
 
 const SidebarLayout = ({ children }) => {
     return (
@@ -13,5 +12,9 @@ const SidebarLayout = ({ children }) => {
         </div>
     );
 };
+SidebarLayout.propTypes = {
+    children: PropTypes.node.isRequired,
+};
 
 export default SidebarLayout;
+
