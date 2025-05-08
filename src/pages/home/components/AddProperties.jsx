@@ -244,7 +244,7 @@ const AddProperties = () => {
               name="location"
               value={formData.location}
               onChange={handleInputChange}
-              placeholder="Location"
+              placeholder="Post Code"
             />
           </div>
           <div className="form-group">
