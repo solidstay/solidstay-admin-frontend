@@ -1,29 +1,29 @@
 import { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa"; // Importing the close icon
 import Select from "react-select";
-import './style.css'
+import "./style.css";
 import { useNavigate, useParams } from "react-router-dom";
 import propertyService from "../../../services/propertyService";
 import toast from "react-hot-toast";
 import { uploadImg } from "../../../services/image";
 
 const AddProperties = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { id } = useParams();
   const [previewImages, setPreviewImages] = useState([]);
   const [formData, setFormData] = useState({
-    propertyName: '',
-    propertyType: '',
-    price: '',
-    location: '',
-    city: '',
-    currentStatus: 'Available',
-    squareFeet: '',
-    bedrooms: '',
-    bathrooms: '',
-    parkingSpace: 'Available',
-    propertyDetail: '',
-    images: [] // Store selected images here
+    propertyName: "",
+    propertyType: "",
+    price: "",
+    location: "",
+    city: "",
+    currentStatus: "Available",
+    squareFeet: "",
+    bedrooms: "",
+    bathrooms: "",
+    parkingSpace: "Available",
+    propertyDetail: "",
+    images: [], // Store selected images here
   });
 
   const propertyTags = [
@@ -42,24 +42,24 @@ const AddProperties = () => {
     { value: "Storage Units", label: "Storage Units" },
     { value: "Wi-fi", label: "Wi-fi" },
     { value: "Sauna", label: "Sauna" },
-    { value: "Gym", label: "Gym" }
+    { value: "Gym", label: "Gym" },
   ];
 
   // ✅ Step 2: Fetch property data by ID
   useEffect(() => {
     if (id) {
-      propertyService.getPropertyById(id)
+      propertyService
+        .getPropertyById(id)
         .then((res) => {
           setFormData(res);
           setPreviewImages(res.images || []);
         })
         .catch((err) => {
-          console.error('Failed to fetch property', err);
-          toast.error('Failed to load property data');
+          console.error("Failed to fetch property", err);
+          toast.error("Failed to load property data");
         });
     }
   }, [id]);
-  
 
   // Handle input changes
   const handleInputChange = (e) => {
@@ -74,7 +74,7 @@ const AddProperties = () => {
   const handleFileChange = async (e) => {
     const files = Array.from(e.target.files);
     const uploadedUrls = [];
-    const previews = files.map(file => URL.createObjectURL(file));
+    const previews = files.map((file) => URL.createObjectURL(file));
     setPreviewImages([...previewImages, ...previews]);
 
     for (const file of files) {
@@ -83,11 +83,11 @@ const AddProperties = () => {
 
       try {
         const res = await uploadImg(form);
-        console.log(res)
+        console.log(res);
         if (res?.success) {
           uploadedUrls.push(...res.urls);
-          console.log(uploadedUrls, 'uploadedUrls')
-          toast.success('Image upload Successfully')
+          console.log(uploadedUrls, "uploadedUrls");
+          toast.success("Image upload Successfully");
         } else {
           toast.error("Failed to upload one or more images");
         }
@@ -102,7 +102,6 @@ const AddProperties = () => {
       images: [...prev.images, ...uploadedUrls],
     }));
   };
-
 
   // Handle removing an image
   const handleRemoveImage = (index) => {
@@ -123,7 +122,9 @@ const AddProperties = () => {
   const handleSelectChange = (selectedOptions) => {
     setFormData({
       ...formData,
-      tags: selectedOptions ? selectedOptions.map(option => option.value) : []
+      tags: selectedOptions
+        ? selectedOptions.map((option) => option.value)
+        : [],
     });
   };
 
@@ -149,11 +150,9 @@ const AddProperties = () => {
       toast.error("Submission failed");
     }
   };
-  
 
   return (
     <div className="property-form-container">
-
       <button
         onClick={() => navigate(-1)} // Correctly handle the click
         className="bg-blue-500 text-white font-semibold mb-4  py-2 px-4 rounded-md shadow-md cursor-pointer hover:bg-blue-600 transition-all"
@@ -172,7 +171,9 @@ const AddProperties = () => {
               multiple
               onChange={handleFileChange}
             />
-            <button type="button" className="upload-btn">Add File</button>
+            <button type="button" className="upload-btn">
+              Add File
+            </button>
             <p>Or drag and drop files</p>
           </div>
 
@@ -181,7 +182,11 @@ const AddProperties = () => {
             <div className="image-previews">
               {previewImages.map((image, index) => (
                 <div key={index} className="image-preview-box">
-                  <img src={image} alt={`preview-${index}`} className="image-preview" />
+                  <img
+                    src={image}
+                    alt={`preview-${index}`}
+                    className="image-preview"
+                  />
                   <button
                     type="button"
                     className="remove-image-btn"
@@ -196,7 +201,10 @@ const AddProperties = () => {
         </label>
       </div>
 
-      <form className="property-form shadow rounded-3xl" onSubmit={handleSubmit}>
+      <form
+        className="property-form shadow rounded-3xl"
+        onSubmit={handleSubmit}
+      >
         <h3>Property Information</h3>
         <div className="form-grid">
           <div className="form-group">
@@ -230,7 +238,7 @@ const AddProperties = () => {
             />
           </div>
           <div className="form-group">
-            <label>Location</label>
+            <label>Post Code</label>
             <input
               type="text"
               name="location"
@@ -306,7 +314,6 @@ const AddProperties = () => {
             </select>
           </div>
 
-
           <div className="form-group full-width">
             <label>Property Tags</label>
             <Select
@@ -316,7 +323,9 @@ const AddProperties = () => {
               className="react-select-container w-full"
               classNamePrefix="react-select"
               onChange={handleSelectChange}
-              value={propertyTags.filter(tag => formData?.tags?.includes(tag.value))}
+              value={propertyTags.filter((tag) =>
+                formData?.tags?.includes(tag.value)
+              )}
               placeholder="Select property tags"
             />
           </div>
@@ -333,9 +342,9 @@ const AddProperties = () => {
           ></textarea>
         </div>
 
-
-
-        <button type="submit" className="submit-btn">Submit</button>
+        <button type="submit" className="submit-btn">
+          Submit
+        </button>
       </form>
     </div>
   );
