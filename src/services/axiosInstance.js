@@ -1,18 +1,18 @@
-import axios from 'axios';
-import Cookies from 'js-cookie';
-import userService from './userService';
+import axios from "axios";
+import Cookies from "js-cookie";
+import userService from "./userService";
 
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
 axiosInstance.interceptors.request.use(
   async (config) => {
     if (!config.skipAuthRefresh) {
-      const token = Cookies.get('adstatixx-jwt-token');
+      const token = Cookies.get("adstatixx-jwt-token");
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
@@ -41,38 +41,44 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   async (error) => {
-    const { config, response: { status } } = error;
+    const {
+      config,
+      response: { status },
+    } = error;
     const originalRequest = config;
-    if (status === 401 && !originalRequest._retry && !originalRequest.skipAuthRefresh) {
+    if (
+      status === 401 &&
+      !originalRequest._retry &&
+      !originalRequest.skipAuthRefresh
+    ) {
       originalRequest._retry = true;
 
       if (!isRefreshing) {
         isRefreshing = true;
         try {
-          console.log('Refreshing token...');
+          console.log("Refreshing token...");
           const response = await userService.refreshToken();
           const { token } = response;
-          Cookies.set('adstatixx-jwt-token', token);
-          console.log('Refresh token done!');
+          Cookies.set("adstatixx-jwt-token", token);
+          console.log("Refresh token done!");
           onRefreshed(token);
           return axiosInstance(originalRequest);
         } catch (err) {
-          console.log('Error in refreshing token: ', err);
-          Cookies.remove('adstatixx-jwt-token');
-          const redirectTo = '/login';
+          console.log("Error in refreshing token: ", err);
+          Cookies.remove("adstatixx-jwt-token");
+          const redirectTo = "/login";
           window.location.href = redirectTo;
           return Promise.reject(err);
-        }
-        finally {
+        } finally {
           isRefreshing = false;
         }
       }
-      console.log('Refresh token already in progress, falling back to queue');
+      console.log("Refresh token already in progress, falling back to queue");
       const retryOriginalRequest = new Promise((resolve) => {
         const callback = (token) => {
           originalRequest.headers.Authorization = `Bearer ${token}`;
           resolve(axiosInstance(originalRequest));
-        }
+        };
         addRefreshSubscriber(callback);
       });
 
